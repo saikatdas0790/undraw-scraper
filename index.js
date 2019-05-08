@@ -1,24 +1,18 @@
-const puppeteer = require("puppeteer");
+const getAllSVGs = require("./src/getAllSVGs");
+const writeSVGDataToFile = require("./src/writeSVGDataToFile");
 
 const maxPageNumber = 34;
 const startingPage = 1;
 const URL = `https://undraw.co/illustrations/load/`;
 
 (async () => {
-  const browser = await puppeteer.launch({ headless: false });
-  const page = await browser.newPage();
-  let allSVGs = [];
+  const dummySVGObj = [
+    {
+      title: "Portfolio Update",
+      imageURL: `https://42f2671d685f51e10fc6-b9fcecea3e50b3b59bdc28dead054ebc.ssl.cf5.rackcdn.com/illustrations/portfolio_update_nqhs.svg`
+    }
+  ];
+  // const allSVGs = await getAllSVGs(startingPage, maxPageNumber, URL);
 
-  for (let index = startingPage; index <= maxPageNumber; index++) {
-    const urlToVisit = `${URL}${index}`;
-    await page.goto(urlToVisit);
-    const svgObjects = await page.$$eval(".item:not(.item--ghost)>a", items =>
-      items.map(item => ({
-        title: item.dataset.title,
-        imageURL: item.dataset.src
-      }))
-    );
-
-    allSVGs = [...allSVGs, ...svgObjects];
-  }
+  await writeSVGDataToFile(dummySVGObj);
 })();

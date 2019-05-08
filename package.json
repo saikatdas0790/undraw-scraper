@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/saikatdas0790/undraw-scraper#readme",
   "dependencies": {
+    "download": "^7.1.0",
     "puppeteer": "^1.15.0"
   },
   "devDependencies": {

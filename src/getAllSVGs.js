@@ -1,7 +1,7 @@
 const puppeteer = require("puppeteer");
 
 const getAllSVGs = async (startingPage, maxPageNumber, URL) => {
-  const browser = await puppeteer.launch({ headless: false });
+  const browser = await puppeteer.launch();
   const page = await browser.newPage();
   let allSVGs = [];
 
@@ -17,6 +17,8 @@ const getAllSVGs = async (startingPage, maxPageNumber, URL) => {
 
     allSVGs = [...allSVGs, ...svgObjects];
   }
+  await browser.close();
+  return allSVGs;
 };
 
 module.exports = getAllSVGs;
